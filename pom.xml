@@ -43,10 +43,16 @@
         <rampart.apache.version>1.6.1-wso2v18</rampart.apache.version>
         <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
         <com.google.code.gson.version>2.9.0</com.google.code.gson.version>
+        <snowflake.jdbc.version>3.14.0</snowflake.jdbc.version>
         <skip-tests>true</skip-tests>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>net.snowflake</groupId>
+            <artifactId>snowflake-jdbc</artifactId>
+            <version>${snowflake.jdbc.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.synapse</groupId>
             <artifactId>synapse-core</artifactId>
@@ -287,25 +293,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.commons</groupId>
-                                    <artifactId>commons-email</artifactId>
-                                    <version>1.2</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target/connector/dependencies</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>copy-emma-dependencies</id>
                         <phase>compile</phase>
                         <goals>
@@ -329,6 +316,25 @@
                             <includeTypes>aar</includeTypes>
                             <includeArtifactIds>SecVerifier</includeArtifactIds>
                             <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-external-dependencies</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>net.snowflake</groupId>
+                                    <artifactId>snowflake-jdbc</artifactId>
+                                    <version>${snowflake.jdbc.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target/connector/dependencies</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                 </executions>

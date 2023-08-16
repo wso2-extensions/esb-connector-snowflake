@@ -18,7 +18,6 @@
 package org.wso2.carbon.connector.operations;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
@@ -103,8 +102,8 @@ public class BatchExecute extends AbstractConnector {
                     JsonObject executeObject = executeArray.get(i).getAsJsonObject();
                     int increment = 0;
                     for (String column : columns) {
-                        JsonElement value = executeObject.get(column);
-                        preparedStatement.setString(++increment, (value != null) ? value.getAsString() : "");
+                        String value = SnowflakeUtils.getValueIgnoreCase(executeObject, column);
+                        preparedStatement.setString(++increment, (value != null) ? value : "");
                     }
                     preparedStatement.addBatch();
                 }
@@ -118,7 +117,8 @@ public class BatchExecute extends AbstractConnector {
                 }
 
                 if (batchResult.length > 0) {
-                    String message = "Successfully executed " + successfulCount + " statements";
+                    String message = "Successfully executed " + successfulCount + " statements out of " +
+                            batchResult.length + " statements.";
                     snowflakesOperationResult = new SnowflakesOperationResult(OPERATION_NAME, true, message);
                 }
             }

@@ -91,6 +91,9 @@ public class Query extends AbstractConnector {
         try {
             JsonArray resultArray = new JsonArray();
             statement = snowflakeConnection.getConnection().createStatement();
+            // this is to avoid error with JDK17 where an exception is thrown with the message mentioned in
+            // https://community.snowflake.com/s/article/Getting-java-lang-NoClassDefFoundError-for-class-RootAllocator
+            statement.executeQuery("ALTER SESSION SET JDBC_QUERY_RESULT_FORMAT='JSON'");
             resultSet = statement.executeQuery(query);
 
             ResultSetMetaData metaData = resultSet.getMetaData();

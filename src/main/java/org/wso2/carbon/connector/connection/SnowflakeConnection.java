@@ -38,14 +38,14 @@ public class SnowflakeConnection implements Connection {
 
     public SnowflakeConnection(ConnectionConfiguration connectionConfiguration)
             throws SQLException, InvalidConfigurationException {
-        String identifier = connectionConfiguration.getAccountIdentifier();
+        String jdbcUrl = connectionConfiguration.getAccountIdentifier();
         String user = connectionConfiguration.getUser();
         String password = connectionConfiguration.getPassword();
         String driver = Constants.SNOWFLAKE_DRIVER;
 
         try {
             Class.forName(driver);
-            this.connection = DriverManager.getConnection(identifier, user, password);
+            this.connection = DriverManager.getConnection(jdbcUrl, user, password);
         } catch (ClassNotFoundException e) {
             throw new InvalidConfigurationException(
                     String.format("Error occurred while loading the Driver: %s", driver), e);

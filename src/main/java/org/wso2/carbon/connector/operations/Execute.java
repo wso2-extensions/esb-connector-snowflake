@@ -17,7 +17,6 @@
 
 package org.wso2.carbon.connector.operations;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.synapse.MessageContext;
@@ -102,8 +101,8 @@ public class Execute extends AbstractConnector {
 
                 int increment = 0;
                 for (String column : columns) {
-                    JsonElement value = jsonPayload.get(column);
-                    preparedStatement.setString(++increment, (value != null) ? value.getAsString() : "");
+                    String value = SnowflakeUtils.getValueIgnoreCase(jsonPayload, column);
+                    preparedStatement.setString(++increment, (value != null) ? value : "");
                 }
             }
 

@@ -19,6 +19,7 @@ package org.wso2.carbon.connector.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.axis2.AxisFault;
 import org.apache.commons.lang3.StringUtils;
@@ -156,6 +157,24 @@ public class SnowflakeUtils {
     public static JsonObject getJsonObject(String payload) {
         Gson gson = new Gson();
         return gson.fromJson(payload, JsonObject.class);
+    }
+
+    /**
+     * Get the value of the key by ignoring the case from the json object
+     * @param jsonObject json object
+     * @param key key
+     * @return value of the key or null if the key is not found
+     */
+    public static String getValueIgnoreCase(JsonObject jsonObject, String key) {
+        for (String actualKey : jsonObject.keySet()) {
+            if (actualKey.equalsIgnoreCase(key)) {
+                JsonElement element = jsonObject.get(actualKey);
+                if (element != null && element.isJsonPrimitive()) {
+                    return element.getAsString();
+                }
+            }
+        }
+        return null; // Key not found
     }
 
     /**

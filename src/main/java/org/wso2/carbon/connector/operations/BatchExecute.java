@@ -89,6 +89,8 @@ public class BatchExecute extends AbstractConnector {
 
         if (StringUtils.isEmpty(payload)) {
             throw new InvalidConfigurationException("Empty Payload is provided.");
+        } else if (!JsonParser.parseString(payload).isJsonArray()){
+            throw new InvalidConfigurationException("Provided payload is not a JSON Array.");
         }
 
         JsonArray executeArray = JsonParser.parseString(payload).getAsJsonArray();
@@ -97,8 +99,8 @@ public class BatchExecute extends AbstractConnector {
 
         try {
             preparedStatement = snowflakeConnection.getConnection().prepareStatement(query);
-            if (executeArray.size()>0 && columns.length>0) {
-                for (int i = 0; i<executeArray.size(); i++) {
+            if (executeArray.size() > 0 && columns.length > 0) {
+                for (int i = 0; i < executeArray.size(); i++) {
                     JsonObject executeObject = executeArray.get(i).getAsJsonObject();
                     int increment = 0;
                     for (String column : columns) {

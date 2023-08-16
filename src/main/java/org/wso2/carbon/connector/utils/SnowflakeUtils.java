@@ -17,7 +17,6 @@
 
 package org.wso2.carbon.connector.utils;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -146,17 +145,6 @@ public class SnowflakeUtils {
         }
 
         return columnNames;
-    }
-
-    /**
-     * Get the json object from the payload
-     *
-     * @param payload
-     * @return json object
-     */
-    public static JsonObject getJsonObject(String payload) {
-        Gson gson = new Gson();
-        return gson.fromJson(payload, JsonObject.class);
     }
 
     /**

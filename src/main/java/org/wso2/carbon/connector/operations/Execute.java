@@ -18,6 +18,7 @@
 package org.wso2.carbon.connector.operations;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.connector.connection.SnowflakeConnection;
@@ -88,6 +89,9 @@ public class Execute extends AbstractConnector {
 
         if (StringUtils.isNotEmpty(payload)) {
             withPayload = true;
+            if (!JsonParser.parseString(payload).isJsonObject()) {
+                throw new InvalidConfigurationException("Provided payload is not a JSON Object.");
+            }
         }
 
         PreparedStatement preparedStatement = null;
@@ -96,7 +100,7 @@ public class Execute extends AbstractConnector {
             preparedStatement = snowflakeConnection.getConnection().prepareStatement(query);
 
             if (withPayload) {
-                JsonObject jsonPayload = SnowflakeUtils.getJsonObject(payload);
+                JsonObject jsonPayload = JsonParser.parseString(payload).getAsJsonObject();
                 String[] columns = SnowflakeUtils.getColumnNames(query);
 
                 int increment = 0;

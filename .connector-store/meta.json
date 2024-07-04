@@ -1,0 +1,20 @@
+{
+    "name": "Snowflake",
+    "owner": "WSO2",
+    "category": "Storage and Content Management",
+    "documentationUrl": "https://apim.docs.wso2.com/en/latest/reference/connectors/snowflake-connector/snowflake-connector-overview/",
+    "description": "The Snowflake Connector offers a complete range of Snowflake operations using WSO2 MI. It provides functionalities to execute a set of standard Snowflake DDL, DML and query commands.",
+    "status": "Active",
+    "labels": [
+        "connector"
+    ],
+    "releases": [
+        {
+            "tag_name": "v1.0.0",
+            "products": [
+                "\"MI 4.2.0\""
+            ],
+            "isHidden": false
+        }
+    ]
+}

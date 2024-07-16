@@ -12,7 +12,7 @@
         {
             "tagName": "1.0.0",
             "products": [
-                "MI 4.2.0"
+                "MI 4.x.x"
             ],
             "isHidden": false
         }

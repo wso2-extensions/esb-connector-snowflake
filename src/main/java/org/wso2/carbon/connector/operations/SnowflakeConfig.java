@@ -60,7 +60,12 @@ public class SnowflakeConfig extends AbstractConnector implements ManagedLifecyc
                 }
 
                 SnowflakeConnection snowflakeConnection = new SnowflakeConnection(configuration);
-                handler.createConnection(Constants.CONNECTOR_NAME, connectionName, snowflakeConnection);
+                try {
+                    handler.createConnection(Constants.CONNECTOR_NAME, connectionName, snowflakeConnection, messageContext);
+                } catch (NoSuchMethodError e) {
+                    //Running in a version of Mediation that does not support local entry undeploy callback
+                    handler.createConnection(Constants.CONNECTOR_NAME, connectionName, snowflakeConnection);
+                }
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug(String.format("Connection exists for %s connector with connection name: %s.", connectorName,
@@ -111,11 +116,13 @@ public class SnowflakeConfig extends AbstractConnector implements ManagedLifecyc
                 (String) ConnectorUtils.lookupTemplateParamater(messageContext, Constants.ACCOUNT_IDENTIFIER);
         String user = (String) ConnectorUtils.lookupTemplateParamater(messageContext, Constants.USER);
         String password = (String) ConnectorUtils.lookupTemplateParamater(messageContext, Constants.PASSWORD);
+        String keepAlive = (String) ConnectorUtils.lookupTemplateParamater(messageContext, Constants.KEEP_ALIVE);
 
         ConnectionConfiguration connectionConfiguration = new ConnectionConfiguration();
         connectionConfiguration.setAccountIdentifier(accountIdentifier);
         connectionConfiguration.setUser(user);
         connectionConfiguration.setPassword(password);
+        connectionConfiguration.setKeepAlive(keepAlive);
         return connectionConfiguration;
     }
 

@@ -21,11 +21,13 @@
     <parameter name="accountIdentifier"/>
     <parameter name="user"/>
     <parameter name="password"/>
+    <parameter name="keepAlive"/>
     <sequence>
         <property name="name" expression="$func:name"/>
         <property name="accountIdentifier" expression="$func:accountIdentifier"/>
         <property name="user" expression="$func:user"/>
         <property name="password" expression="$func:password"/>
+        <property name="keepAlive" expression="$func:keepAlive"/>
         <class name="org.wso2.carbon.connector.operations.SnowflakeConfig"/>
     </sequence>
 </template>

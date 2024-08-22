@@ -28,6 +28,7 @@ import org.wso2.carbon.connector.utils.Constants;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * The Snowflake connection.
@@ -41,11 +42,15 @@ public class SnowflakeConnection implements Connection {
         String jdbcUrl = connectionConfiguration.getAccountIdentifier();
         String user = connectionConfiguration.getUser();
         String password = connectionConfiguration.getPassword();
+        String keepAlive = connectionConfiguration.getKeepAlive();
         String driver = Constants.SNOWFLAKE_DRIVER;
-
+        Properties properties = new Properties();
+        properties.put("user", user);
+        properties.put("password", password);
+        properties.put(Constants.CLIENT_SESSION_KEEP_ALIVE, Boolean.valueOf(keepAlive));
         try {
             Class.forName(driver);
-            this.connection = DriverManager.getConnection(jdbcUrl, user, password);
+            this.connection = DriverManager.getConnection(jdbcUrl, properties);
         } catch (ClassNotFoundException e) {
             throw new InvalidConfigurationException(
                     String.format("Error occurred while loading the Driver: %s", driver), e);

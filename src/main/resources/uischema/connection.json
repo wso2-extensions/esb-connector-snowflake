@@ -58,6 +58,17 @@
                     "required": "true",
                     "helpTip": "Password you use to login to Snowflake account."
                   }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "keepAlive",
+                    "displayName": "Keep Alive",
+                    "inputType": "string",
+                    "defaultValue": "false",
+                    "required": "false",
+                    "helpTip": "Connection keep alive"
+                  }
                 }
               ]
             }

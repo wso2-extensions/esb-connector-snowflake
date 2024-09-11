@@ -37,4 +37,7 @@ public class Constants {
     public static final String PROPERTY_ERROR_MESSAGE = "ERROR_MESSAGE";
     public static final String STATUS_CODE = "HTTP_SC";
     public static final Object HTTP_STATUS_500 = "500";
+    public static final String CLIENT_SESSION_KEEP_ALIVE = "CLIENT_SESSION_KEEP_ALIVE";
+    public static final String KEEP_ALIVE = "keepAlive";
+
 }

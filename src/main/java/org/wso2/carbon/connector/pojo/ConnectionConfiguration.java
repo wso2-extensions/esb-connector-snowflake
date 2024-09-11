@@ -33,6 +33,8 @@ public class ConnectionConfiguration {
     private String user;
     private String password;
 
+    private String keepAlive = "false";
+
     /**
      * Get the connection name for the snowflake connection.
      *
@@ -115,5 +117,13 @@ public class ConnectionConfiguration {
             throw new InvalidConfigurationException("Mandatory parameter 'password' is not set.");
         }
         this.password = password;
+    }
+
+    public void setKeepAlive(String keepAlive) {
+        this.keepAlive = keepAlive;
+    }
+
+    public String getKeepAlive() {
+        return keepAlive;
     }
 }

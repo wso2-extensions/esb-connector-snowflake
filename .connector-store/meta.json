@@ -6,13 +6,17 @@
     "description": "The Snowflake Connector offers a complete range of Snowflake operations using WSO2 MI. It provides functionalities to execute a set of standard Snowflake DDL, DML and query commands.",
     "status": "Active",
     "labels": [
-        "database"
+        "database",
+        "big-data"
     ],
     "releases": [
         {
             "tagName": "v1.0.1",
             "products": [
-                "MI 4.x.x"
+                "MI 4.3.0",
+                "MI 4.2.0",
+                "MI 4.1.0",
+                "MI 4.0.0"
             ],
             "isHidden": false
         }

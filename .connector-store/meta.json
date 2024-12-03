@@ -1,10 +1,15 @@
 {
     "name": "Snowflake",
     "owner": "WSO2",
+    "product": "MI",
     "category": "Storage and Content Management",
     "documentationUrl": "https://mi.docs.wso2.com/en/latest/reference/connectors/snowflake-connector/snowflake-connector-overview/",
+    "mavenGroupId": "org.wso2.carbon.esb.connector",
+    "mavenArtifactId": "org.wso2.carbon.connector.snowflake",
     "description": "The Snowflake Connector offers a complete range of Snowflake operations using WSO2 MI. It provides functionalities to execute a set of standard Snowflake DDL, DML and query commands.",
     "status": "Active",
+    "connectorRank": 162,
+    "type": "Connector",
     "labels": [
         "database",
         "big-data"
@@ -17,6 +22,34 @@
                 "MI 4.2.0",
                 "MI 4.1.0",
                 "MI 4.0.0"
+            ],
+            "operations": [
+                {
+                    "name": "init",
+                    "description": "Init operation",
+                    "isHidden": true
+                },
+                {
+                    "name": "query",
+                    "description": "Query a given SQL statement.",
+                    "isHidden": false
+                },
+                {
+                    "name": "execute",
+                    "description": "Execute a given SQL statement.",
+                    "isHidden": false
+                },
+                {
+                    "name": "batchExecute",
+                    "description": "Batch execute a given SQL statement.",
+                    "isHidden": false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "Snowflake",
+                    "description": "Connection for querying Snowflake data warehouse."
+                }
             ],
             "isHidden": false
         }

@@ -8,7 +8,7 @@
     "mavenArtifactId": "org.wso2.carbon.connector.snowflake",
     "description": "The Snowflake Connector offers a complete range of Snowflake operations using WSO2 MI. It provides functionalities to execute a set of standard Snowflake DDL, DML and query commands.",
     "status": "Active",
-    "connectorRank": 162,
+    "rank": 162,
     "type": "Connector",
     "labels": [
         "database",

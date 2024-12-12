@@ -22,5 +22,6 @@
         <dependency component="operations" />
         <description>WSO2 snowflake connector library</description>
     </component>
+    <displayName>Snowflake</displayName>
     <icon>icon/icon-small.png</icon>
 </connector>

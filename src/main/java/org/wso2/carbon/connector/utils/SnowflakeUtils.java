@@ -33,6 +33,9 @@ import org.wso2.carbon.connector.pojo.SnowflakesOperationResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.wso2.carbon.connector.utils.Constants.PROPERTY_ERROR_DETAIL;
+import static org.wso2.carbon.connector.utils.Constants.PROPERTY_ERROR_EXCEPTION;
+
 /**
  * Util methods related to snowflake connector operations
  */
@@ -75,6 +78,7 @@ public class SnowflakeUtils {
             jsonObject.addProperty("error", result.getError().getErrorCode());
             jsonObject.addProperty("code", result.getError().getErrorCode());
             jsonObject.addProperty("errorDetail", result.getError().getErrorDetail());
+            jsonObject.addProperty("errorException", msgContext.getProperty(PROPERTY_ERROR_EXCEPTION).toString());
         }
 
         org.apache.axis2.context.MessageContext axisMsgCtx =
@@ -173,7 +177,9 @@ public class SnowflakeUtils {
      * @param e exception
      * @param error Error object
      */
-    public static void setError(String operation, MessageContext messageContext, Exception e, Error error) {
+    public static void setError(String operation, MessageContext messageContext, Exception e, Error error, String errorDetail) {
+        messageContext.setProperty(PROPERTY_ERROR_DETAIL, errorDetail);
+        messageContext.setProperty(PROPERTY_ERROR_EXCEPTION, e.toString());
         SnowflakesOperationResult result =
                 new SnowflakesOperationResult(operation, false, error, e.getMessage());
         setResultAsPayload(messageContext, result);

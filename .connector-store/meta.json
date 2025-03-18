@@ -16,6 +16,45 @@
     ],
     "releases": [
         {
+            "tagName": "v1.0.3",
+            "products": [
+                "MI 4.4.0",
+                "MI 4.3.0",
+                "MI 4.2.0",
+                "MI 4.1.0",
+                "MI 4.0.0"
+            ],
+            "operations": [
+                {
+                    "name": "init",
+                    "description": "Init operation",
+                    "isHidden": true
+                },
+                {
+                    "name": "query",
+                    "description": "Query a given SQL statement.",
+                    "isHidden": false
+                },
+                {
+                    "name": "execute",
+                    "description": "Execute a given SQL statement.",
+                    "isHidden": false
+                },
+                {
+                    "name": "batchExecute",
+                    "description": "Batch execute a given SQL statement.",
+                    "isHidden": false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "Snowflake",
+                    "description": "Connection for querying Snowflake data warehouse."
+                }
+            ],
+            "isHidden": false
+        },
+        {
             "tagName": "v1.0.2",
             "products": [
                 "MI 4.4.0",

@@ -99,7 +99,7 @@ public class SnowflakeConfig extends AbstractConnector implements ManagedLifecyc
      * @param errorDetail    Error Detail.
      */
     private void handleError(MessageContext messageContext, Exception e, Error error, String errorDetail) {
-        SnowflakeUtils.setError(OPERATION_NAME, messageContext, e, error);
+        SnowflakeUtils.setError(OPERATION_NAME, messageContext, e, error, errorDetail);
         handleException(errorDetail, e, messageContext);
     }
 

@@ -138,7 +138,7 @@ public class Execute extends AbstractConnector {
      * @param errorDetail    Error Detail.
      */
     private void handleError(MessageContext messageContext, Exception e, Error error, String errorDetail) {
-        SnowflakeUtils.setError(OPERATION_NAME, messageContext, e, error, errorDetail);
+        SnowflakeUtils.setError(OPERATION_NAME, messageContext, e, error);
         handleException(errorDetail, e, messageContext);
     }
 }

@@ -30,6 +30,9 @@ import org.apache.synapse.core.axis2.Axis2MessageContext;
 import org.wso2.carbon.connector.exception.InvalidConfigurationException;
 import org.wso2.carbon.connector.pojo.SnowflakesOperationResult;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,7 +80,7 @@ public class SnowflakeUtils {
             setErrorPropertiesToMessageContext(msgContext, result.getError());
             jsonObject.addProperty("error", result.getError().getErrorCode());
             jsonObject.addProperty("code", result.getError().getErrorCode());
-            jsonObject.addProperty("errorDetail", result.getError().getErrorDetail());
+            jsonObject.addProperty("errorDetail", msgContext.getProperty(PROPERTY_ERROR_DETAIL).toString());
             jsonObject.addProperty("errorException", msgContext.getProperty(PROPERTY_ERROR_EXCEPTION).toString());
         }
 
@@ -177,12 +180,25 @@ public class SnowflakeUtils {
      * @param e exception
      * @param error Error object
      */
-    public static void setError(String operation, MessageContext messageContext, Exception e, Error error, String errorDetail) {
-        messageContext.setProperty(PROPERTY_ERROR_DETAIL, errorDetail);
+    public static void setError(String operation, MessageContext messageContext, Exception e, Error error) {
+        messageContext.setProperty(PROPERTY_ERROR_DETAIL, getStackTrace(e));
         messageContext.setProperty(PROPERTY_ERROR_EXCEPTION, e.toString());
         SnowflakesOperationResult result =
                 new SnowflakesOperationResult(operation, false, error, e.getMessage());
         setResultAsPayload(messageContext, result);
     }
 
+    /**
+     * Get the stack trace into a String
+     *
+     * @param throwable
+     * @return the stack trace as a string
+     */
+    private static String getStackTrace(Throwable throwable) {
+
+        final Writer result = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(result);
+        throwable.printStackTrace(printWriter);
+        return result.toString();
+    }
 }

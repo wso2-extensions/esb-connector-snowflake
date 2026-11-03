@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.ManagedLifecycle;
 import org.apache.synapse.MessageContext;
+import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.SynapseEnvironment;
 import org.wso2.carbon.connector.connection.SnowflakeConnection;
 import org.wso2.carbon.connector.core.AbstractConnector;
@@ -30,6 +31,7 @@ import org.wso2.carbon.connector.exception.InvalidConfigurationException;
 import org.wso2.carbon.connector.pojo.ConnectionConfiguration;
 import org.wso2.carbon.connector.utils.Constants;
 import org.wso2.carbon.connector.utils.Error;
+import org.wso2.carbon.connector.utils.SnowflakeConnectorUndeployObserver;
 import org.wso2.carbon.connector.utils.SnowflakeUtils;
 import java.sql.SQLException;
 
@@ -83,7 +85,8 @@ public class SnowflakeConfig extends AbstractConnector implements ManagedLifecyc
 
     @Override
     public void init(SynapseEnvironment synapseEnvironment) {
-        // Nothing to do when initiating the connector
+        SynapseConfiguration synapseConfig = synapseEnvironment.getSynapseConfiguration();
+        synapseConfig.registerObserver(new SnowflakeConnectorUndeployObserver(synapseConfig));
     }
     @Override
     public void destroy() {

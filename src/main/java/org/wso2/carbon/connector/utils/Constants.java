@@ -42,4 +42,7 @@ public class Constants {
     public static final String CLIENT_SESSION_KEEP_ALIVE = "CLIENT_SESSION_KEEP_ALIVE";
     public static final String KEEP_ALIVE = "keepAlive";
 
+    public static final CharSequence LIBRARY_NAME_PATTEN1 = "snowflake-connector";
+    public static final CharSequence LIBRARY_NAME_PATTEN2 = "connector-snowflake";
+    public static final String CONNECTOR_LIBRARY_PACKAGE_TYPE = "org.wso2.carbon.connector";
 }

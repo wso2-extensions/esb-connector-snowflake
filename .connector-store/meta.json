@@ -16,7 +16,7 @@
     ],
     "releases": [
         {
-            "tagName": "v1.0.4",
+            "tagName": "v1.1.1",
             "products": [
                 "MI 4.4.0",
                 "MI 4.3.0",
@@ -29,33 +29,105 @@
             ],
             "operations": [
                 {
-                    "name": "init",
-                    "description": "Init operation",
-                    "isHidden": true
-                },
-                {
-                    "name": "query",
-                    "description": "Query a given SQL statement.",
-                    "isHidden": false
-                },
-                {
                     "name": "execute",
-                    "description": "Execute a given SQL statement.",
+                    "description": "Execute a given SQL statement",
+                    "params": [
+                        {
+                            "name": "executeQuery",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "SQL query to execute"
+                        },
+                        {
+                            "name": "payload",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Payload to be used in the query"
+                        }
+                    ],
                     "isHidden": false
                 },
                 {
                     "name": "batchExecute",
-                    "description": "Batch execute a given SQL statement.",
+                    "description": "Batch execute a given SQL statement",
+                    "params": [
+                        {
+                            "name": "executeQuery",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "SQL query to execute"
+                        },
+                        {
+                            "name": "payload",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Bulk Payload to be used in the query"
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "query",
+                    "description": "Query a the given SQL statement",
+                    "params": [
+                        {
+                            "name": "query",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "SQL query to execute"
+                        }
+                    ],
                     "isHidden": false
                 }
             ],
             "connections": [
                 {
                     "name": "Snowflake",
-                    "description": "Connection for querying Snowflake data warehouse."
+                    "description": "Snowflake Connection",
+                    "params": [
+                        {
+                            "name": "connectionName",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "SNOWFLAKE_CONNECTION_1",
+                            "description": "The name for the snowflake connection"
+                        },
+                        {
+                            "name": "accountIdentifier",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The unique identifies the Snowflake account."
+                        },
+                        {
+                            "name": "user",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Username you use to login to Snowflake account"
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Password you use to login to Snowflake account."
+                        },
+                        {
+                            "name": "keepAlive",
+                            "type": "string",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Connection keep alive"
+                        }
+                    ]
                 }
-            ],
-            "isHidden": false
+            ]
         },
         {
             "tagName": "v1.0.2",
